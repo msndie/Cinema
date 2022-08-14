@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.school21</groupId>
-    <artifactId>cinema</artifactId>
+    <artifactId>Cinema</artifactId>
     <version>1.0</version>
-    <name>cinema</name>
     <packaging>war</packaging>
 
     <properties>
@@ -41,6 +40,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>5.3.22</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
             <version>5.3.22</version>
         </dependency>
         <dependency>
@@ -78,6 +83,13 @@
                         <containerId>tomcat9x</containerId>
                         <type>embedded</type>
                     </container>
+                    <deployables>
+                        <deployable>
+                            <properties>
+                                <context>/</context>
+                            </properties>
+                        </deployable>
+                    </deployables>
                 </configuration>
             </plugin>
         </plugins>
