@@ -2,24 +2,27 @@
     <h2>FreeMarker Spring MVC Hello World</h2>
 </div>
 <div id="content">
-<#--    <fieldset>-->
-<#--        <legend>Add Car</legend>-->
-<#--        <form name="car" action="add" method="post">-->
-<#--            Make : <input type="text" name="make" /><br/>-->
-<#--            Model: <input type="text" name="model" /><br/>-->
-<#--            <input type="submit" value="Save" />-->
-<#--        </form>-->
-<#--    </fieldset>-->
+    <fieldset>
+        <legend>Add movie hall</legend>
+        <form name="car" action="/admin/panel/halls" method="post">
+            Serial number : <input type="number" name="serialNumber" /><br/>
+            Number of seats : <input type="number" name="numberOfSeats" /><br/>
+            <input type="submit" value="Add hall" />
+        </form>
+    </fieldset>
     <br/>
     <table class="datatable">
         <tr>
-            <th>Make</th>
-            <th>Model</th>
+            <th>Serial Number</th>
+            <th>Number of seats</th>
         </tr>
-        <#list model["carList"] as car>
-            <tr>
-                <td>${car}</td>
-            </tr>
-        </#list>
+        <#if model["HallsList"]?has_content>
+            <#list model["HallsList"] as hall>
+                <tr>
+                    <td>${hall.serialNumber}</td>
+                    <td>${hall.numberOfSeats}</td>
+                </tr>
+            </#list>
+        </#if>
     </table>
 </div>

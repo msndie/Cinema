@@ -10,9 +10,8 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 @Configuration
-//@PropertySource("classpath:../application.properties")
-@ComponentScan(basePackages = "edu.school21.cinema")
 @EnableWebMvc
+@ComponentScan("edu.school21.cinema")
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean

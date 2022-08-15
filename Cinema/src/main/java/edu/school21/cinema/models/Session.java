@@ -1,11 +1,12 @@
 package edu.school21.cinema.models;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @NoArgsConstructor
@@ -14,7 +15,7 @@ import java.math.BigDecimal;
 @ToString
 @Entity
 @Table(name = "sessions")
-public class Session {
+public class Session implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

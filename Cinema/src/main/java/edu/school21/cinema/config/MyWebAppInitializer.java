@@ -18,6 +18,6 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
         ctx.setServletContext(servletContext);
         ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
         servlet.setLoadOnStartup(1);
-//        servlet.addMapping("/");
+        servlet.addMapping("/");
     }
 }
