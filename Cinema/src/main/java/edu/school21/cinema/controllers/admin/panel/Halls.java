@@ -1,4 +1,4 @@
-package edu.school21.cinema.controllers;
+package edu.school21.cinema.controllers.admin.panel;
 
 import edu.school21.cinema.models.Hall;
 import edu.school21.cinema.services.HallService;
@@ -8,12 +8,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin/panel/halls")
-public class Admin {
+public class Halls {
 
     private HallService hallService;
 
@@ -25,7 +23,7 @@ public class Admin {
     @GetMapping
     public String getHalls(@ModelAttribute("model") ModelMap model) {
         model.addAttribute("HallsList", hallService.findAll());
-        return "admin";
+        return "admin/panel/halls";
     }
 
     @PostMapping
@@ -49,9 +47,10 @@ public class Admin {
             Hall hall = new Hall();
             hall.setSerialNumber(serialNumber);
             hall.setNumberOfSeats(numberOfSeats);
-            hallService.addNewHall(hall);
-            System.out.println("Hall added");
-            System.out.println(hall);
+             if (hallService.add(hall)) {
+                System.out.println("Hall added");
+                System.out.println(hall);
+             }
         }
         return "redirect:/admin/panel/halls";
     }

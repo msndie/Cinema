@@ -17,13 +17,17 @@ import java.util.Set;
 @Entity
 @Table(name = "halls")
 public class Hall implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "serial_number")
     private Long serialNumber;
+
     @Column(name = "number_of_seats")
     private int numberOfSeats;
+
     @ToString.Exclude
     @OneToMany(mappedBy = "hall")
     private Set<Session> sessions = new LinkedHashSet<>();

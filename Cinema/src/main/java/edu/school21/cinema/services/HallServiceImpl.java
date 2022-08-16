@@ -5,6 +5,7 @@ import edu.school21.cinema.repositories.HallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -18,10 +19,16 @@ public class HallServiceImpl implements HallService {
     }
 
     public List<Hall> findAll() {
-        return hallRepository.findAll();
+        List<Hall> list = new LinkedList<>();
+        hallRepository.findAll().forEach(list::add);
+        return list;
     }
 
-    public void addNewHall(Hall hall) {
-        hallRepository.save(hall);
+    public boolean add(Hall hall) {
+        if (!hallRepository.existsBySerialNumber(hall.getSerialNumber())) {
+            hallRepository.save(hall);
+            return true;
+        }
+        return false;
     }
 }

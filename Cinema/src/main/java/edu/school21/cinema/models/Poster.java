@@ -16,13 +16,15 @@ import java.util.UUID;
 @Entity
 @Table(name = "posters")
 public class Poster implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private UUID uuid;
-    private String name;
+
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "film_id", nullable = false)
     @ToString.Exclude
     private Film film;
+    private UUID uuid;
+    private String name;
 }

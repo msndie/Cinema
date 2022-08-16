@@ -1,10 +1,9 @@
 package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.models.Poster;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface PosterRepository {
-    List<Poster> findAll();
-    void save(Poster poster);
+@Repository
+public interface PosterRepository extends CrudRepository<Poster, Long> {
 }

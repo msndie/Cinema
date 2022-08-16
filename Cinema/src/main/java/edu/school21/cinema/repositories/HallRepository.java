@@ -1,10 +1,11 @@
 package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.models.Hall;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface HallRepository {
-    List<Hall> findAll();
-    void save(Hall hall);
+@Repository
+public interface HallRepository extends CrudRepository<Hall, Long> {
+    Hall findHallBySerialNumber(Long serialNumber);
+    boolean existsBySerialNumber(Long serialNumber);
 }

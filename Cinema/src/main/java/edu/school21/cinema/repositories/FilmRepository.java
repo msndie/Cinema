@@ -1,10 +1,11 @@
 package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.models.Film;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+@Repository
+public interface FilmRepository extends CrudRepository<Film, Long> {
+    boolean existsByTitleAndYearAndDescription(String title, int year, String description);
 
-public interface FilmRepository {
-    List<Film> findAll();
-    void save(Film film);
 }

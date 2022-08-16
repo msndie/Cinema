@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -26,37 +27,11 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:../application.properties")
 @EnableTransactionManagement
+@EnableJpaRepositories("edu.school21.cinema.repositories")
 public class SpringConfig {
 
     @Autowired
     private Environment env;
-
-//    @Value("${db.url}")
-//    private String url;
-//    @Value("${db.user}")
-//    private String user;
-//    @Value("${db.password}")
-//    private String pass;
-//    @Value("${db.driver.name}")
-//    private String driver;
-//    @Value("${storage.path}")
-//    private String storage;
-//    @Value("${dataSourceClassName}")
-//    private String dataSourceClassName;
-//    @Value("${dataSource.user}")
-//    private String user;
-//    @Value("${dataSource.password}")
-//    private String pass;
-//    @Value("${dataSource.databaseName}")
-//    private String databaseName;
-//    @Value("${dataSource.portNumber}")
-//    private String port;
-//    @Value("${dataSource.serverName}")
-//    private String serverName;
-//    @Value("${hibernate.dialect}")
-//    private String dialect;
-//    @Value("${show.sql}")
-//    private String showSql;
 
     @Bean
     public DataSource dataSource() throws IOException {
@@ -70,14 +45,6 @@ public class SpringConfig {
         props.put("dataSource.logWriter", new PrintWriter(System.out));
         HikariConfig config = new HikariConfig(props);
         HikariDataSource ds = new HikariDataSource(config);
-//        ds.setJdbcUrl("jdbc:postgresql://localhost:5432/cinema");
-//        ds.setUsername("postgres");
-//        ds.setPassword("postgres");
-//        ds.setDriverClassName("org.postgresql.Driver");
-//        ds.setJdbcUrl(url);
-//        ds.setUsername(user);
-//        ds.setPassword(pass);
-//        ds.setDriverClassName(driver);
         JdbcTemplate jdbcTemplate = new JdbcTemplate(ds);
         String schema = new String(Files.readAllBytes(Paths.get("src/main/resources/sql/schema.sql")), StandardCharsets.UTF_8);
 //        String data = new String(Files.readAllBytes(Paths.get("src/main/resources/sql/data.sql")), StandardCharsets.UTF_8);
@@ -87,15 +54,15 @@ public class SpringConfig {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() throws IOException {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws IOException {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setDataSource(dataSource());
         factory.setPackagesToScan("edu.school21.cinema.models");
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setShowSql(Boolean.getBoolean(env.getProperty("show_sql")));
         factory.setJpaVendorAdapter(vendorAdapter);
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        properties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         factory.setJpaProperties(properties);
         return factory;
     }
@@ -103,7 +70,7 @@ public class SpringConfig {
     @Bean
     public PlatformTransactionManager transactionManager() throws IOException {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactoryBean().getObject());
+        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
     }
 

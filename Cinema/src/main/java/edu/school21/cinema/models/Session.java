@@ -26,10 +26,10 @@ public class Session implements Serializable {
     @JoinColumn(name = "film_id")
     private Film film;
 
-    private BigDecimal price;
-
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "hall_id")
     private Hall hall;
+
+    private BigDecimal price;
 }
