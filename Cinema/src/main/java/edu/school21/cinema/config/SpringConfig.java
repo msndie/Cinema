@@ -34,6 +34,11 @@ public class SpringConfig {
     private Environment env;
 
     @Bean
+    public String path() {
+        return env.getProperty("storage.path");
+    }
+
+    @Bean
     public DataSource dataSource() throws IOException {
         Properties props = new Properties();
         props.setProperty("dataSource.databaseName", env.getProperty("dataSource.databaseName"));

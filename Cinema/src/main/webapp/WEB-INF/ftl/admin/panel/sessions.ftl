@@ -4,23 +4,39 @@
 <div id="content">
     <fieldset>
         <legend>Add movie hall</legend>
-        <form name="car" action="/admin/panel/halls" method="post">
-            Serial number : <input type="number" name="serialNumber" /><br/>
-            Number of seats : <input type="number" name="numberOfSeats" /><br/>
-            <input type="submit" value="Add hall" />
+        <form name="film" action="/admin/panel/films" method="post">
+            Title : <input type="text" name="title" required/><br/>
+            Year of release : <input type="number" name="year" required/><br/>
+            Age restrictions : <input type="number" name="age" required/><br/>
+            Description : <input type="text" name="description" required/><br/>
+            <input type="submit" value="Add film" />
         </form>
     </fieldset>
     <br/>
     <table class="datatable">
         <tr>
-            <th>Serial Number</th>
-            <th>Number of seats</th>
+            <th>Title</th>
+            <th>Year of release</th>
+            <th>Age restrictions</th>
+            <th>Description</th>
+            <th>Poster</th>
         </tr>
-        <#if model["HallsList"]?has_content>
-            <#list model["HallsList"] as hall>
+        <#if model["FilmsList"]?has_content>
+            <#list model["FilmsList"] as film>
                 <tr>
-                    <td>${hall.serialNumber}</td>
-                    <td>${hall.numberOfSeats}</td>
+                    <td>${film.title}</td>
+                    <td>${film.year}</td>
+                    <td>${film.ageRestrictions}</td>
+                    <td>${film.description}</td>
+                    <#if film.poster??>
+                    <#else>
+                    <td>
+                        <form action="images" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" accept="image/*"/>
+                            <input type="submit" value="Upload poster">
+                        </form>
+                    </td>
+                    </#if>
                 </tr>
             </#list>
         </#if>
