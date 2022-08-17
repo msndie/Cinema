@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PosterServiceImpl implements PosterService {
@@ -27,5 +28,17 @@ public class PosterServiceImpl implements PosterService {
     public boolean add(Poster entity) {
         posterRepository.save(entity);
         return true;
+    }
+
+    public void delete(Poster entity) {
+        posterRepository.delete(entity);
+    }
+
+    public void update(Poster entity) {
+        posterRepository.save(entity);
+    }
+
+    public Poster findByUuid(UUID uuid) {
+        return posterRepository.findByUuid(uuid);
     }
 }

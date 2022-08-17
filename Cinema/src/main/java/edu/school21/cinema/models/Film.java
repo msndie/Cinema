@@ -36,7 +36,8 @@ public class Film implements Serializable {
     private Set<Session> sessions = new LinkedHashSet<>();
 
     @ToString.Exclude
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "poster_id")
     private Poster poster;
+
 }

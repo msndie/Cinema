@@ -20,11 +20,7 @@ public class Poster implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "film_id", nullable = false)
-    @ToString.Exclude
-    private Film film;
     private UUID uuid;
     private String name;
+    private String extension;
 }

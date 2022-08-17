@@ -28,4 +28,12 @@ public class SessionServiceImpl implements SessionService {
         sessionRepository.save(entity);
         return true;
     }
+
+    public void delete(Session entity) {
+        sessionRepository.delete(entity);
+    }
+
+    public void update(Session entity) {
+        sessionRepository.save(entity);
+    }
 }

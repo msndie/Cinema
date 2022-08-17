@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FilmRepository extends CrudRepository<Film, Long> {
     boolean existsByTitleAndYearAndDescription(String title, int year, String description);
-
+    Film findByPosterId(Long id);
 }

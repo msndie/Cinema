@@ -31,4 +31,12 @@ public class HallServiceImpl implements HallService {
         }
         return false;
     }
+
+    public void delete(Hall entity) {
+        hallRepository.delete(entity);
+    }
+
+    public void update(Hall entity) {
+        hallRepository.save(entity);
+    }
 }

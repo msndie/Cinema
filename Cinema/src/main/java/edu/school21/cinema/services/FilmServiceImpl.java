@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FilmServiceImpl implements FilmService {
@@ -30,5 +31,21 @@ public class FilmServiceImpl implements FilmService {
             filmRepository.save(entity);
         }
         return true;
+    }
+
+    public void delete(Film entity) {
+        filmRepository.delete(entity);
+    }
+
+    public void update(Film entity) {
+        filmRepository.save(entity);
+    }
+
+    public Film findByPosterId(Long id) {
+        return filmRepository.findByPosterId(id);
+    }
+
+    public Optional<Film> findById(Long id) {
+        return filmRepository.findById(id);
     }
 }

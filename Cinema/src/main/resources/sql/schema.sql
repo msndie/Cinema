@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS posters (
     id BIGSERIAL PRIMARY KEY,
     uuid UUID NOT NULL,
     name TEXT NOT NULL,
-    film_id BIGINT NOT NULL
+    extension text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS films (
@@ -22,11 +22,6 @@ CREATE TABLE IF NOT EXISTS films (
         FOREIGN KEY (poster_id)
             REFERENCES posters(id)
 );
-
-ALTER TABLE posters
-    ADD FOREIGN KEY (film_id)
-        REFERENCES films(id)
-            DEFERRABLE INITIALLY DEFERRED;
 
 CREATE TABLE IF NOT EXISTS sessions (
     id BIGSERIAL PRIMARY KEY,
