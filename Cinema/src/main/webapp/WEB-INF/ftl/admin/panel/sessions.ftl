@@ -2,41 +2,41 @@
     <h2>FreeMarker Spring MVC Hello World</h2>
 </div>
 <div id="content">
-    <fieldset>
-        <legend>Add movie hall</legend>
-        <form name="film" action="/admin/panel/films" method="post">
-            Title : <input type="text" name="title" required/><br/>
-            Year of release : <input type="number" name="year" required/><br/>
-            Age restrictions : <input type="number" name="age" required/><br/>
-            Description : <input type="text" name="description" required/><br/>
-            <input type="submit" value="Add film" />
-        </form>
-    </fieldset>
-    <br/>
+    <#if model["FilmsList"]?has_content && model["HallsList"]?has_content>
+        <fieldset>
+            <legend>Add movie session</legend>
+            <form name="session" action="/admin/panel/sessions" method="post">
+                Film : <select name="film" required>
+                    <#list model["FilmsList"] as film>
+                        <option value="${film.id}">${film.title} ${film.year}</option>
+                    </#list>
+                </select>
+                Hall : <select name="hall" required>
+                    <#list model["HallsList"] as hall>
+                        <option value="${hall.id}">${hall.serialNumber}</option>
+                    </#list>
+                </select>
+                Time : <input type="datetime-local" name="date" required/>
+                Coast : <input type="number" name="price" required/>
+                <input type="submit" value="Add session" />
+            </form>
+        </fieldset>
+        <br/>
+    </#if>
     <table class="datatable">
         <tr>
-            <th>Title</th>
-            <th>Year of release</th>
-            <th>Age restrictions</th>
-            <th>Description</th>
-            <th>Poster</th>
+            <th>Title (year)</th>
+            <th>Serial number of hall</th>
+            <th>Ticket price</th>
+            <th>Date and time</th>
         </tr>
-        <#if model["FilmsList"]?has_content>
-            <#list model["FilmsList"] as film>
+        <#if model["SessionsList"]?has_content>
+            <#list model["SessionsList"] as session>
                 <tr>
-                    <td>${film.title}</td>
-                    <td>${film.year}</td>
-                    <td>${film.ageRestrictions}</td>
-                    <td>${film.description}</td>
-                    <#if film.poster??>
-                    <#else>
-                    <td>
-                        <form action="images" method="post" enctype="multipart/form-data">
-                            <input type="file" name="file" accept="image/*"/>
-                            <input type="submit" value="Upload poster">
-                        </form>
-                    </td>
-                    </#if>
+                    <td>${session.film.title} (${session.film.year?string.computer})</td>
+                    <td>${session.hall.serialNumber?string.computer}</td>
+                    <td>${session.price?string.computer}</td>
+                    <td>${session.getFormattedDateTime()}</td>
                 </tr>
             </#list>
         </#if>

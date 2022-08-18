@@ -8,6 +8,11 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @NoArgsConstructor
 @Getter
@@ -32,4 +37,11 @@ public class Session implements Serializable {
     private Hall hall;
 
     private BigDecimal price;
+
+    @Column(name = "date_time", nullable = false)
+    private LocalDateTime dateTime;
+
+    public String getFormattedDateTime() {
+        return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    }
 }

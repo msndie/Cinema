@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HallServiceImpl implements HallService {
@@ -38,5 +39,9 @@ public class HallServiceImpl implements HallService {
 
     public void update(Hall entity) {
         hallRepository.save(entity);
+    }
+
+    public Optional<Hall> findById(Long id) {
+        return hallRepository.findById(id);
     }
 }

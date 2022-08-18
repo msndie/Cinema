@@ -26,7 +26,7 @@
             <#list model["FilmsList"] as film>
                 <tr>
                     <td>${film.title}</td>
-                    <td>${film.year}</td>
+                    <td>${film.year?string.computer}</td>
                     <td>${film.ageRestrictions}</td>
                     <td>${film.description}</td>
                     <#if film.poster??>

@@ -19,8 +19,8 @@
         <#if model["HallsList"]?has_content>
             <#list model["HallsList"] as hall>
                 <tr>
-                    <td>${hall.serialNumber}</td>
-                    <td>${hall.numberOfSeats}</td>
+                    <td>${hall.serialNumber?string.computer}</td>
+                    <td>${hall.numberOfSeats?string.computer}</td>
                 </tr>
             </#list>
         </#if>

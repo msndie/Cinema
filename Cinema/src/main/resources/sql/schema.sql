@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS sessions (
     film_id BIGINT NOT NULL,
     hall_id BIGINT NOT NULL,
     price NUMERIC NOT NULL,
+    date_time TIMESTAMP NOT NULL,
     CONSTRAINT halls
         FOREIGN KEY (hall_id)
             REFERENCES halls(id),
