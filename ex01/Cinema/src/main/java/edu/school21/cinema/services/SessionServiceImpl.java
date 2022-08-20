@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SessionServiceImpl implements SessionService {
@@ -35,5 +36,13 @@ public class SessionServiceImpl implements SessionService {
 
     public void update(Session entity) {
         sessionRepository.save(entity);
+    }
+
+    public List<Session> findByFilmNameContains(String filmName) {
+        return sessionRepository.findByFilm_TitleContainsIgnoreCase(filmName);
+    }
+
+    public Optional<Session> findById(Long id) {
+        return sessionRepository.findById(id);
     }
 }
