@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/sessions")
-public class SessionsSearchAndId {
+public class Sessions {
 
     private SessionService sessionService;
 
