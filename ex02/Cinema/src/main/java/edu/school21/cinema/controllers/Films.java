@@ -6,7 +6,9 @@ import edu.school21.cinema.models.Message;
 import edu.school21.cinema.services.FilmService;
 import edu.school21.cinema.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,7 +21,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Controller
-//@RequestMapping(value = "/films")
 public class Films {
 
     private final FilmService filmService;
@@ -43,7 +44,6 @@ public class Films {
     @GetMapping(value = "/films/{id}/chat")
     public String getChat(@ModelAttribute("model") ModelMap model, @PathVariable String id,
                           HttpServletRequest request, HttpServletResponse response) {
-        System.err.println("test get mapping");
         Optional<Film> film = validateId(id);
         if (film.isPresent()) {
             model.addAttribute("Messages", messageService.findLast20ByFilmId(film.get().getId()));
@@ -69,17 +69,12 @@ public class Films {
         return "/films/chat";
     }
 
-    @MessageMapping(value = "/films/{id}/chat/messages")
+    @MessageMapping(value = "/films/{id}/chat/send")
     @SendTo(value = "/films/{id}/chat/messages")
-    public Message getMessage(@PathVariable String id, @RequestBody Message message) {
-        System.err.println("test message mapping");
-        Optional<Film> film = validateId(id);
-        if (film.isPresent()) {
-            message.setFilm(film.get());
-            messageService.add(message);
-            return message;
-        }
-        return null;
+    public Message getMessage(@Payload Message message, @DestinationVariable Long id) {
+        System.out.println(message);
+        messageService.add(message);
+        return message;
     }
 
     private Optional<Film> validateId(String id) {
