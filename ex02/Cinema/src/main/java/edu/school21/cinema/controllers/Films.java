@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "/films")
+//@RequestMapping(value = "/films")
 public class Films {
 
     private final FilmService filmService;
@@ -33,28 +33,31 @@ public class Films {
         this.faker = faker;
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/films/{id}")
     public String getFilm(@PathVariable String id, @ModelAttribute("model") ModelMap model) {
         Optional<Film> film = validateId(id);
         film.ifPresent(value -> model.addAttribute("Film", value));
         return "/films/id";
     }
 
-    @GetMapping(value = "/{id}/chat")
+    @GetMapping(value = "/films/{id}/chat")
     public String getChat(@ModelAttribute("model") ModelMap model, @PathVariable String id,
                           HttpServletRequest request, HttpServletResponse response) {
+        System.err.println("test get mapping");
         Optional<Film> film = validateId(id);
         if (film.isPresent()) {
             model.addAttribute("Messages", messageService.findLast20ByFilmId(film.get().getId()));
             model.addAttribute("Film", film.get());
             model.addAttribute("Id", film.get().getId());
-            Cookie[] cookies = request.getCookies();
             boolean isCookie = false;
-            for (Cookie cookie : cookies) {
-                if (Objects.equals(cookie.getName(), "Name")) {
-                    model.addAttribute("Name", cookie.getValue());
-                    isCookie = true;
-                    break;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (Objects.equals(cookie.getName(), "Name")) {
+                        model.addAttribute("Name", cookie.getValue());
+                        isCookie = true;
+                        break;
+                    }
                 }
             }
             if (!isCookie) {
@@ -66,9 +69,10 @@ public class Films {
         return "/films/chat";
     }
 
-    @MessageMapping(value = "/{id}/chat")
-    @SendTo(value = "/{id}/chat/messages")
+    @MessageMapping(value = "/films/{id}/chat/messages")
+    @SendTo(value = "/films/{id}/chat/messages")
     public Message getMessage(@PathVariable String id, @RequestBody Message message) {
+        System.err.println("test message mapping");
         Optional<Film> film = validateId(id);
         if (film.isPresent()) {
             message.setFilm(film.get());
