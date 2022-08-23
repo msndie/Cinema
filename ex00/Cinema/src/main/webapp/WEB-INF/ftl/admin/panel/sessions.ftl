@@ -1,7 +1,8 @@
-<div id="header">
-    <h2>FreeMarker Spring MVC Hello World</h2>
-</div>
-<div id="content">
+<html>
+<head>
+    <title>Sessions manage</title>
+</head>
+<body>
     <#if model["FilmsList"]?has_content && model["HallsList"]?has_content>
         <fieldset>
             <legend>Add movie session</legend>
@@ -22,23 +23,26 @@
             </form>
         </fieldset>
         <br/>
+        <table class="datatable">
+            <tr>
+                <th>Title (year)</th>
+                <th>Serial number of hall</th>
+                <th>Ticket price</th>
+                <th>Date and time</th>
+            </tr>
+            <#if model["SessionsList"]?has_content>
+                <#list model["SessionsList"] as session>
+                    <tr>
+                        <td>${session.film.title} (${session.film.year?string.computer})</td>
+                        <td>${session.hall.serialNumber?string.computer}</td>
+                        <td>${session.price?string.computer}</td>
+                        <td>${session.getFormattedDateTime()}</td>
+                    </tr>
+                </#list>
+            </#if>
+        </table>
+    <#else>
+        <h1>Add halls and films first</h1>
     </#if>
-    <table class="datatable">
-        <tr>
-            <th>Title (year)</th>
-            <th>Serial number of hall</th>
-            <th>Ticket price</th>
-            <th>Date and time</th>
-        </tr>
-        <#if model["SessionsList"]?has_content>
-            <#list model["SessionsList"] as session>
-                <tr>
-                    <td>${session.film.title} (${session.film.year?string.computer})</td>
-                    <td>${session.hall.serialNumber?string.computer}</td>
-                    <td>${session.price?string.computer}</td>
-                    <td>${session.getFormattedDateTime()}</td>
-                </tr>
-            </#list>
-        </#if>
-    </table>
-</div>
+</body>
+</html>

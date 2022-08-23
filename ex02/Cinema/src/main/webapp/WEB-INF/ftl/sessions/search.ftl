@@ -18,55 +18,50 @@
     <script>
         jQuery(document).ready(function($) {
 
-		$("#search-form").submit(function(event) {
+            $("#search-form").submit(function(event) {
 
-			// Disble the search button
-			enableSearchButton(false);
+                // Disble the search button
+                enableSearchButton(false);
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                searchViaAjax();
+            });
+	    });
 
-			// Prevent the form from submitting via the browser.
-			event.preventDefault();
+        function searchViaAjax() {
 
-			searchViaAjax();
+            var search = $("#query").val();
 
-		});
+            $.ajax({
+                type : "GET",
+                contentType : "application/json",
+                url : "/sessions/search",
+                data : { filmName : search },
+                timeout : 100000,
+                success : function(data) {
+                    console.log("SUCCESS: ", data);
+                    display(data);
+                },
+                error : function(e) {
+                    console.log("ERROR: ", e);
+                    display(e);
+                },
+                done : function(e) {
+                    console.log("DONE");
+                    enableSearchButton(true);
+                }
+            });
+        }
 
-	});
+        function enableSearchButton(flag) {
+            $("#search-button").prop("disabled", flag);
+        }
 
-	function searchViaAjax() {
-
-        var search = $("#query").val();
-
-		$.ajax({
-			type : "GET",
-            contentType : "application/json",
-			url : "/sessions/search",
-			data : { filmName : search },
-			timeout : 100000,
-			success : function(data) {
-				console.log("SUCCESS: ", data);
-				display(data);
-			},
-			error : function(e) {
-				console.log("ERROR: ", e);
-				display(e);
-			},
-			done : function(e) {
-				console.log("DONE");
-				enableSearchButton(true);
-			}
-		});
-
-	}
-
-	function enableSearchButton(flag) {
-		$("#search-button").prop("disabled", flag);
-	}
-
-	function display(data) {
-		var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-				+ JSON.stringify(data, null, 4) + "&lt;/pre&gt;";
-		$('#feedback').html(json);
-	}
+        function display(data) {
+            var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
+                    + JSON.stringify(data, null, 4) + "&lt;/pre&gt;";
+            $('#feedback').html(json);
+        }
     </script>
 </body>
 </html>

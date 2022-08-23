@@ -44,25 +44,25 @@ public class Images {
         if (uuid != null) {
             poster = posterService.findByUuid(uuid);
         }
-        if (poster != null) {
-            try {
-                return ResponseEntity.ok()
-                        .contentType(MediaType.valueOf("image/" + poster.getExtension()))
-                        .body(FileUtils.readFileToByteArray(new File(path + "/" + uuid + "." + poster.getExtension())));
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-                Film film = filmService.findByPosterId(poster.getId());
-                film.setPoster(null);
-                filmService.update(film);
-                posterService.delete(poster);
-                return ResponseEntity.status(HttpStatus.GONE)
-                        .contentType(MediaType.TEXT_PLAIN)
-                        .body("Poster not found, probably it doesn't exist anymore!".getBytes(StandardCharsets.UTF_8));
-            }
+        if (poster == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .body("Poster not found!".getBytes(StandardCharsets.UTF_8));
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .contentType(MediaType.TEXT_PLAIN)
-                .body("Poster not found!".getBytes(StandardCharsets.UTF_8));
+        try {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.valueOf("image/" + poster.getExtension()))
+                    .body(FileUtils.readFileToByteArray(new File(path + "/" + uuid + "." + poster.getExtension())));
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+            Film film = filmService.findByPosterId(poster.getId());
+            film.setPoster(null);
+            filmService.update(film);
+            posterService.delete(poster);
+            return ResponseEntity.status(HttpStatus.GONE)
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .body("Poster not found, probably it doesn't exist anymore!".getBytes(StandardCharsets.UTF_8));
+        }
     }
 
     @PostMapping

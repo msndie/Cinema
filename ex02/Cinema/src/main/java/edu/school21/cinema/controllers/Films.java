@@ -34,6 +34,12 @@ public class Films {
         this.faker = faker;
     }
 
+    @GetMapping(value = "/films")
+    public String getFilms(@ModelAttribute("model") ModelMap model) {
+        model.addAttribute("Films", filmService.findAll());
+        return "/films/allFilms";
+    }
+
     @GetMapping(value = "/films/{id}")
     public String getFilm(@PathVariable String id, @ModelAttribute("model") ModelMap model) {
         Optional<Film> film = validateId(id);

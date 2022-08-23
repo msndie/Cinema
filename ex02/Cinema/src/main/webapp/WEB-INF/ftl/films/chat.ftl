@@ -97,7 +97,12 @@
             var messageElement = document.createElement('li');
             messageElement.classList.add('chat-message');
             var usernameElement = document.createElement('span');
-            var usernameText = document.createTextNode(message.userName);
+            var usernameText;
+            if ("${model["Name"]}" === message.userName) {
+                usernameText = document.createTextNode("you");
+            } else {
+                usernameText = document.createTextNode(message.userName);
+            }
             usernameElement.appendChild(usernameText);
             messageElement.appendChild(usernameElement);
 

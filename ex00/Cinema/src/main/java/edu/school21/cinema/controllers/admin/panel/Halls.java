@@ -33,9 +33,7 @@ public class Halls {
         try {
             serialNumber = Long.parseLong(request.getParameter("serialNumber"));
             numberOfSeats = Integer.parseInt(request.getParameter("numberOfSeats"));
-        } catch (NumberFormatException ignored) {
-            System.err.println("EXCEPTION");
-        }
+        } catch (NumberFormatException ignored) {}
         if (serialNumber != null && numberOfSeats != null
             && serialNumber > 0 && numberOfSeats > 0) {
             Hall hall = new Hall();

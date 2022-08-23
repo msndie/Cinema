@@ -1,7 +1,8 @@
-<div id="header">
-    <h2>FreeMarker Spring MVC Hello World</h2>
-</div>
-<div id="content">
+<html>
+<head>
+    <title>Films manager</title>
+</head>
+<body>
     <fieldset>
         <legend>Add movie hall</legend>
         <form name="film" action="/admin/panel/films" method="post" enctype="multipart/form-data">
@@ -13,16 +14,18 @@
             <input type="submit" value="Add film" />
         </form>
     </fieldset>
+
     <br/>
-    <table class="datatable">
-        <tr>
-            <th>Title</th>
-            <th>Year of release</th>
-            <th>Age restrictions</th>
-            <th>Description</th>
-            <th>Poster</th>
-        </tr>
-        <#if model["FilmsList"]?has_content>
+
+    <#if model["FilmsList"]?has_content>
+        <table class="datatable">
+            <tr>
+                <th>Title</th>
+                <th>Year of release</th>
+                <th>Age restrictions</th>
+                <th>Description</th>
+                <th>Poster</th>
+            </tr>
             <#list model["FilmsList"] as film>
                 <tr>
                     <td>${film.title}</td>
@@ -44,6 +47,7 @@
                     </#if>
                 </tr>
             </#list>
-        </#if>
-    </table>
-</div>
+        </table>
+    </#if>
+</body>
+</html>
