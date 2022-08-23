@@ -38,9 +38,6 @@ public class MessageServiceImpl implements MessageService {
     }
 
     public List<Message> findLast20ByFilmId(Long filmId) {
-        List<Message> messageList = messageRepository.findAllByFilmId(filmId);
-        int size = messageList.size();
-        System.out.println(size);
-        return size > 20 ? messageList.subList(size - 20, size) : messageList;
+        return messageRepository.findLast20ByFilmId(filmId);
     }
 }

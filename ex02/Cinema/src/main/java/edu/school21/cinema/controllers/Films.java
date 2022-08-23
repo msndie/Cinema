@@ -37,7 +37,11 @@ public class Films {
     @GetMapping(value = "/films/{id}")
     public String getFilm(@PathVariable String id, @ModelAttribute("model") ModelMap model) {
         Optional<Film> film = validateId(id);
-        film.ifPresent(value -> model.addAttribute("Film", value));
+        if (film.isPresent()) {
+            model.addAttribute("Film", film.get());
+        } else {
+            return "notFound";
+        }
         return "/films/id";
     }
 
@@ -65,6 +69,9 @@ public class Films {
                 response.addCookie(cookie);
                 model.addAttribute("Name", cookie.getValue());
             }
+        } else {
+            response.setStatus(404);
+            return "notFound";
         }
         return "/films/chat";
     }

@@ -34,32 +34,6 @@ public class Images {
         this.filmService = filmService;
     }
 
-//    @ResponseBody
-//    @GetMapping(value = "{id}", produces = {MediaType.IMAGE_GIF_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-//    public byte[] get(@PathVariable String id) {
-//        UUID uuid = null;
-//        Poster poster = null;
-//        try {
-//            uuid = UUID.fromString(id);
-//        } catch (IllegalArgumentException ignored) {}
-//        if (uuid != null) {
-//            poster = posterService.findByUuid(uuid);
-//        }
-//        if (poster != null) {
-//            try {
-//                return FileUtils.readFileToByteArray(new File(path + "/" + uuid + "." + poster.getExtension()));
-//            } catch (IOException e) {
-//                System.err.println(e.getMessage());
-//                Film film = filmService.findByPosterId(poster.getId());
-//                film.setPoster(null);
-//                filmService.update(film);
-//                posterService.delete(poster);
-//                return "Poster not found, probably it doesnt exist anymore!".getBytes(StandardCharsets.UTF_8);
-//            }
-//        }
-//        return "Poster not found!".getBytes(StandardCharsets.UTF_8);
-//    }
-
     @GetMapping(value = "{id}")
     public ResponseEntity<byte[]> get(@PathVariable String id) {
         UUID uuid = null;
@@ -81,9 +55,9 @@ public class Images {
                 film.setPoster(null);
                 filmService.update(film);
                 posterService.delete(poster);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                return ResponseEntity.status(HttpStatus.GONE)
                         .contentType(MediaType.TEXT_PLAIN)
-                        .body("Poster not found, probably it doesnt exist anymore!".getBytes(StandardCharsets.UTF_8));
+                        .body("Poster not found, probably it doesn't exist anymore!".getBytes(StandardCharsets.UTF_8));
             }
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)

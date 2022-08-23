@@ -53,9 +53,9 @@ public class SpringConfig {
         HikariDataSource ds = new HikariDataSource(config);
         JdbcTemplate jdbcTemplate = new JdbcTemplate(ds);
         String schema = new String(Files.readAllBytes(Paths.get("src/main/resources/sql/schema.sql")), StandardCharsets.UTF_8);
-//        String data = new String(Files.readAllBytes(Paths.get("src/main/resources/sql/data.sql")), StandardCharsets.UTF_8);
+        String data = new String(Files.readAllBytes(Paths.get("src/main/resources/sql/data.sql")), StandardCharsets.UTF_8);
         jdbcTemplate.execute(schema);
-//        jdbcTemplate.execute(data);
+        jdbcTemplate.execute(data);
         return ds;
     }
 

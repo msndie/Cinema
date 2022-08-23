@@ -30,8 +30,4 @@ public class Message {
 
     @Column(name = "film_id", nullable = false)
     private Long filmId;
-
-//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-//    @JoinColumn(name = "film_id", nullable = false)
-//    private Film film;
 }

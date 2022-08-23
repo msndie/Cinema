@@ -6,8 +6,8 @@
         <legend>Add movie hall</legend>
         <form name="film" action="/admin/panel/films" method="post" enctype="multipart/form-data">
             Title : <input type="text" name="title" required/><br/>
-            Year of release (1895 - 2022) : <input type="number" name="year" required/><br/>
-            Age restrictions : <input type="number" name="age" required/><br/>
+            Year of release (1895 - 2022) : <input type="number" name="year" min="1895" max="2022" required/><br/>
+            Age restrictions : <input type="number" name="age" min="0" max="21" required/><br/>
             Description : <input type="text" name="description" required/><br/>
             Poster : <input type="file" accept="image/*" name="file"/>
             <input type="submit" value="Add film" />
@@ -36,7 +36,7 @@
                     <#else>
                         <td>
                             <form action="/images" method="post" enctype="multipart/form-data">
-                                <input type="file" name="file" accept="image/*"/>
+                                <input type="file" name="file" accept="image/*" required />
                                 <input type="hidden" name="id" value="${film.id}">
                                 <input type="submit" value="Upload poster">
                             </form>

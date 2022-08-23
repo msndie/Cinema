@@ -52,30 +52,6 @@ public class FilmsManage {
             }
         }
         return "redirect:/admin/panel/films";
-//        String title = request.getParameter("title");
-//        String year = request.getParameter("year");
-//        String description = request.getParameter("description");
-//        String age = request.getParameter("age");
-//        Integer ageRestrictions = null;
-//        Integer yearOfRelease = null;
-//        try {
-//            ageRestrictions = Integer.parseInt(age);
-//            yearOfRelease = Integer.parseInt(year);
-//        } catch (NumberFormatException ignored) {}
-//        if (ageRestrictions != null && yearOfRelease != null
-//            && yearOfRelease >= FIRST_FILM && yearOfRelease <= CURRENT_YEAR) {
-//            Film film = new Film();
-//            film.setDescription(description);
-//            film.setTitle(title);
-//            film.setYear(yearOfRelease);
-//            film.setAgeRestrictions(ageRestrictions);
-//            if (filmService.add(film)) {
-//                if (file != null) {
-//                    imageHelper(file, film);
-//                }
-//            }
-//        }
-//        return "redirect:/admin/panel/films";
     }
 
     private void imageHelper(MultipartFile file, Film film) {

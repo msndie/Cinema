@@ -55,9 +55,9 @@ public class Images {
                 film.setPoster(null);
                 filmService.update(film);
                 posterService.delete(poster);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                return ResponseEntity.status(HttpStatus.GONE)
                         .contentType(MediaType.TEXT_PLAIN)
-                        .body("Poster not found, probably it doesnt exist anymore!".getBytes(StandardCharsets.UTF_8));
+                        .body("Poster not found, probably it doesn't exist anymore!".getBytes(StandardCharsets.UTF_8));
             }
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)

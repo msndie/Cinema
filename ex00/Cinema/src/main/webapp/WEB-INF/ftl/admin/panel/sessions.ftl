@@ -17,7 +17,7 @@
                     </#list>
                 </select>
                 Time : <input type="datetime-local" name="date" required/>
-                Coast : <input type="number" name="price" required/>
+                Coast : <input type="number" name="price" min="1" required/>
                 <input type="submit" value="Add session" />
             </form>
         </fieldset>

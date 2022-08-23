@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MessageRepository extends CrudRepository<Message, Long> {
-    //TODO
+public interface MessageRepository extends CrudRepository<Message, Long>, CustomizedMessageRepository<Message> {
     List<Message> findAllByFilmId(Long filmId);
 }
