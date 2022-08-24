@@ -5,7 +5,6 @@ import edu.school21.cinema.repositories.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -19,9 +18,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     public List<Session> findAll() {
-        List<Session> list = new LinkedList<>();
-        sessionRepository.findAll().forEach(list::add);
-        return list;
+        return sessionRepository.getAll();
     }
 
     public boolean add(Session entity) {

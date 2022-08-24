@@ -20,9 +20,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     public List<Session> findAll() {
-        List<Session> list = new LinkedList<>();
-        sessionRepository.findAll().forEach(list::add);
-        return list;
+        return sessionRepository.getAll();
     }
 
     public boolean add(Session entity) {
@@ -39,7 +37,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     public List<Session> findByFilmNameContains(String filmName) {
-        return sessionRepository.findByFilm_TitleContainsIgnoreCase(filmName);
+        return sessionRepository.findByFilmTitleContainsIgnoreCase(filmName);
     }
 
     public Optional<Session> findById(Long id) {

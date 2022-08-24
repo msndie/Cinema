@@ -20,9 +20,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     public List<Film> findAll() {
-        List<Film> list = new LinkedList<>();
-        filmRepository.findAll().forEach(list::add);
-        return list;
+        return filmRepository.getAll();
     }
 
     public boolean add(Film entity) {

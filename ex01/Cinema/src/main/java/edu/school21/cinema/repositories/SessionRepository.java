@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SessionRepository extends CrudRepository<Session, Long> {
-    List<Session> findByFilm_TitleContainsIgnoreCase(String title);
+public interface SessionRepository extends CrudRepository<Session, Long>, CustomizedSessionRepository<Session> {
 }
