@@ -5,7 +5,6 @@ import edu.school21.cinema.repositories.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +19,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     public List<Film> findAll() {
-        return filmRepository.getAll();
+        return filmRepository.findAll();
     }
 
     public boolean add(Film entity) {
@@ -36,7 +35,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     public void update(Film entity) {
-        filmRepository.save(entity);
+        filmRepository.update(entity);
     }
 
     public Film findByPosterId(Long id) {

@@ -19,7 +19,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     public List<Film> findAll() {
-        return filmRepository.getAll();
+        return filmRepository.findAll();
     }
 
     public boolean add(Film entity) {
@@ -35,7 +35,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     public void update(Film entity) {
-        filmRepository.save(entity);
+        filmRepository.update(entity);
     }
 
     public Film findByPosterId(Long id) {

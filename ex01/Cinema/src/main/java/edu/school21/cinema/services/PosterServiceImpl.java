@@ -5,7 +5,6 @@ import edu.school21.cinema.repositories.PosterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,9 +19,7 @@ public class PosterServiceImpl implements PosterService {
     }
 
     public List<Poster> findAll() {
-        List<Poster> list = new LinkedList<>();
-        posterRepository.findAll().forEach(list::add);
-        return list;
+        return posterRepository.findAll();
     }
 
     public boolean add(Poster entity) {
@@ -35,7 +32,7 @@ public class PosterServiceImpl implements PosterService {
     }
 
     public void update(Poster entity) {
-        posterRepository.save(entity);
+        posterRepository.update(entity);
     }
 
     public Poster findByUuid(UUID uuid) {

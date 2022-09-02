@@ -5,7 +5,6 @@ import edu.school21.cinema.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -19,9 +18,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     public List<Message> findAll() {
-        List<Message> list = new LinkedList<>();
-        messageRepository.findAll().forEach(list::add);
-        return list;
+        return messageRepository.findAll();
     }
 
     public boolean add(Message entity) {
@@ -34,7 +31,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     public void update(Message entity) {
-        messageRepository.save(entity);
+        messageRepository.update(entity);
     }
 
     public List<Message> findLast20ByFilmId(Long filmId) {

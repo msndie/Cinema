@@ -5,7 +5,6 @@ import edu.school21.cinema.repositories.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +19,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     public List<Session> findAll() {
-        return sessionRepository.getAll();
+        return sessionRepository.findAll();
     }
 
     public boolean add(Session entity) {
@@ -33,7 +32,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     public void update(Session entity) {
-        sessionRepository.save(entity);
+        sessionRepository.update(entity);
     }
 
     public List<Session> findByFilmNameContains(String filmName) {

@@ -18,7 +18,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     public List<Session> findAll() {
-        return sessionRepository.getAll();
+        return sessionRepository.findAll();
     }
 
     public boolean add(Session entity) {
@@ -31,6 +31,6 @@ public class SessionServiceImpl implements SessionService {
     }
 
     public void update(Session entity) {
-        sessionRepository.save(entity);
+        sessionRepository.update(entity);
     }
 }
