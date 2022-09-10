@@ -3,11 +3,7 @@ Wait for my teammate to finish front. I will add screenshots later
 
 # Cinema
 
-This project is a part of the Java branch in holygraph of School21.
-
-# Summary
-
-This is a site for movie theater, it will be developed more in next project called Cinema-spring-boot.
+This is a site for movie theater, it will be developed more in next project called CinemaSpringBoot.
 
 In this project we use:
 - Spring Controllers
