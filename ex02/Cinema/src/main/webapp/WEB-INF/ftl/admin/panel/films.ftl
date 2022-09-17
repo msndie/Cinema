@@ -1,56 +1,112 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Manage films</title>
+    <title>Films manager</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
+    </style>
 </head>
+
 <body>
-    <div id="header">
-        <h2>FreeMarker Spring MVC Hello World</h2>
-    </div>
-    <div id="content">
-        <fieldset>
-            <legend>Add movie hall</legend>
-            <form name="film" action="/admin/panel/films" method="post" enctype="multipart/form-data">
-                Title : <input type="text" name="title" required/><br/>
-                Year of release (1895 - 2022) : <input type="number" name="year" min="1895" max="2022" required/><br/>
-                Age restrictions : <input type="number" name="age" required min="0" max="21" /><br/>
-                Description : <input type="text" name="description" required/><br/>
-                Poster (10mb max) : <input type="file" accept="image/*" name="file"/>
-                <input type="submit" value="Add film" />
-            </form>
-        </fieldset>
-        <br/>
-        <table class="datatable">
-            <tr>
-                <th>Title</th>
-                <th>Year of release</th>
-                <th>Age restrictions</th>
-                <th>Description</th>
-                <th>Poster</th>
-            </tr>
+    <div class="container col">
+        <div class="container-fluid pb-2">
+            <fieldset>
+                <legend class="h1">Add movie</legend>
+                <form name="film" action="/admin/panel/films" method="post" enctype="multipart/form-data">
+                    <div class="row pb-3 g-3">
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" name="title" required aria-label="Title"
+                                placeholder="Title">
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="number" name="year" min="1895" max="2022" required
+                                aria-label="Year" placeholder="Year of release (1895 - 2022)">
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="number" name="age" min="0" max="21" required
+                                aria-label="Age" placeholder="Age restrictions">
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" name="description" required aria-label="Descr"
+                                placeholder="Description">
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="file" accept="image/*" name="file">
+                        </div>
+                        <div class="d-grid col-md-1">
+                            <input class="btn btn-primary" type="submit" value="Add film" />
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+        <hr />
+        <div class="container table-responsive">
             <#if model["FilmsList"]?has_content>
-                <#list model["FilmsList"] as film>
-                    <tr>
-                        <td>${film.title}</td>
-                        <td>${film.year?string.computer}</td>
-                        <td>${film.ageRestrictions}</td>
-                        <td>${film.description}</td>
-                        <#if film.poster??>
-                            <td>
-                                <a href="/images/${film.poster.uuid}" target="_blank">${film.poster.name}</a>
-                            </td>
-                        <#else>
-                            <td>
-                                <form action="/images" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="file" accept="image/*" required/>
-                                    <input type="hidden" name="id" value="${film.id}">
-                                    <input type="submit" value="Upload poster">
-                                </form>
-                            </td>
-                        </#if>
-                    </tr>
-                </#list>
+                <table class="datatable table table-hover">
+                    <thead>
+                        <th>Title</th>
+                        <th>Year of release</th>
+                        <th>Age restrictions</th>
+                        <th>Description</th>
+                        <th>Poster</th>
+                    </thead>
+                    <#list model["FilmsList"] as film>
+                        <tr>
+                            <td>${film.title}</td>
+                            <td>${film.year?string.computer}</td>
+                            <td>${film.ageRestrictions}</td>
+                            <td>${film.description}</td>
+                            <#if film.poster??>
+                                <td>
+                                    <a href="/images/${film.poster.uuid}" target="_blank">${film.poster.name}</a>
+                                </td>
+                                <#else>
+                                    <td>
+                                        <form action="/images" method="post" enctype="multipart/form-data">
+                                            <div class="row g-3 pt-1">
+                                                <div class="col-12">
+                                                    <input class="form-control" type="file" accept="image/*" name="file"
+                                                        required>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="btn btn-primary" type="submit"
+                                                        value="Upload poster" />
+                                                </div>
+                                                <input type="hidden" name="id" value="${film.id}">
+                                            </div>
+                                        </form>
+                                    </td>
+                            </#if>
+                        </tr>
+                    </#list>
+                </table>
             </#if>
-        </table>
+        </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
