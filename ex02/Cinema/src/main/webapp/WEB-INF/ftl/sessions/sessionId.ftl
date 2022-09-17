@@ -50,7 +50,7 @@
                         <td>${model["Session"].film.description}</td>
                         <td>
                             <#if model["Session"].film.poster??>
-                                <a href="/images/${model[" Session"].film.poster.uuid}" class="link-primary"
+                                <a href="/images/${model["Session"].film.poster.uuid}" class="link-primary"
                                     target="_blank">${model["Session"].film.poster.name}</a>
                                 <#else>
                                     No poster
