@@ -1,6 +1,5 @@
 package edu.school21.cinema.models;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonView;
 import edu.school21.cinema.utils.View;
@@ -11,16 +10,14 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.LinkedHashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name = "films")
+@Table(name = "films", schema = "ex02")
 @JsonRootName(value = "film")
 public class Film implements Serializable {
 

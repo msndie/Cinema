@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 @Setter
 @ToString
 @Entity
-@Table(name = "sessions")
+@Table(name = "sessions", schema = "ex02")
 public class Session implements Serializable {
 
     @JsonView(View.Search.class)

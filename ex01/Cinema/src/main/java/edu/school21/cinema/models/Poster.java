@@ -14,7 +14,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @Entity
-@Table(name = "posters")
+@Table(name = "posters", schema = "ex01")
 public class Poster implements Serializable {
 
     @Id

@@ -7,15 +7,13 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name = "halls")
+@Table(name = "halls", schema = "ex01")
 public class Hall implements Serializable {
 
     @Id

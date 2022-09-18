@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity
-@Table(name = "messages")
+@Table(name = "messages", schema = "ex02")
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,7 +16,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Entity
-@Table(name = "films")
+@Table(name = "films", schema = "ex00")
 public class Film implements Serializable {
 
     private static final int FIRST_FILM = 1895;

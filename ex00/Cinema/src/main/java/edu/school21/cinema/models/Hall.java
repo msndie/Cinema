@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Entity
-@Table(name = "halls")
+@Table(name = "halls", schema = "ex00")
 public class Hall implements Serializable {
 
     @Id
