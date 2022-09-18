@@ -27,7 +27,7 @@
 <body>
     <div class="container col">
         <div class="container table-responsive">
-            <#assign film=model["FilmsList"] />
+            <#assign film=model["Film"] />
             <table class="datatable table table-hover">
                 <thead>
                     <th>Title</th>
