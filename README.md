@@ -28,7 +28,7 @@
 </details>
 </details>
 
-This is a site for movie theater, it will be developed more in next project called CinemaSpringBoot.
+This is a site for movie theater, it will be developed more in next project called <a href="https://github.com/msndie/CinemaSpringBoot">CinemaSpringBoot</a>.
 
 In this project we use:
 - Spring Controllers
