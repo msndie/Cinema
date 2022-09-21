@@ -50,9 +50,8 @@ public class SpringConfig {
         HikariConfig config = new HikariConfig(props);
         HikariDataSource ds = new HikariDataSource(config);
         JdbcTemplate jdbcTemplate = new JdbcTemplate(ds);
-        System.out.println("\n\n\n\n\n\n" + Paths.get("").toString() + "\n\n\n\n");
-        String schema = new String(Files.readAllBytes(Paths.get("webapps/cinema/WEB-INF/classes/sql/schema.sql")), StandardCharsets.UTF_8);
-        String data = new String(Files.readAllBytes(Paths.get("webapps/cinema/WEB-INF/classes/sql/data.sql")), StandardCharsets.UTF_8);
+        String schema = new String(Files.readAllBytes(Paths.get("webapps/ROOT/WEB-INF/classes/sql/schema.sql")), StandardCharsets.UTF_8);
+        String data = new String(Files.readAllBytes(Paths.get("webapps/ROOT/WEB-INF/classes/sql/data.sql")), StandardCharsets.UTF_8);
         jdbcTemplate.execute(schema);
         jdbcTemplate.execute(data);
         return ds;
