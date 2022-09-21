@@ -8,5 +8,4 @@ COPY --from=build /home/Cinema/target/root.war /usr/local/tomcat/webapps/ROOT.wa
 # RUN chmod +x /wait-for
 # CMD ["sh", "-c", "/wait-for host:5433 -- /usr/local/tomcat/bin/catalina.sh run"]
 RUN apt-get update -y && apt-get install netcat -y
-RUN mkdir /root/imgs
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
