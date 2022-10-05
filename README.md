@@ -1,8 +1,6 @@
 # Cinema
 
 <details>
-<summary>Screenshots</summary>
-<details>
 <summary>/admin/panel/films</summary>
 <img src="/screenshots/admin_panel_films.png">
 </details>
@@ -25,7 +23,6 @@
 <details>
 <summary>/films/{id}/chat</summary>
 <img src="/screenshots/films_{id}_chat.png">
-</details>
 </details>
 
 This is a site for movie theater, it will be developed more in next project called <a href="https://github.com/msndie/CinemaSpringBoot">CinemaSpringBoot</a>.
